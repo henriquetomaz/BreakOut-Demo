@@ -15,6 +15,8 @@
 		41EA8CBB1D26357A0094387C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41EA8CB91D26357A0094387C /* Main.storyboard */; };
 		41EA8CBD1D26357A0094387C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41EA8CBC1D26357A0094387C /* Assets.xcassets */; };
 		41EA8CC01D26357A0094387C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41EA8CBE1D26357A0094387C /* LaunchScreen.storyboard */; };
+		41EA8CCA1D2638080094387C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EA8CC81D2638080094387C /* Fabric.framework */; };
+		41EA8CCB1D2638080094387C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EA8CC91D2638080094387C /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +33,8 @@
 		41EA8CBC1D26357A0094387C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		41EA8CBF1D26357A0094387C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		41EA8CC11D26357A0094387C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41EA8CC81D2638080094387C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
+		41EA8CC91D2638080094387C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +42,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41EA8CCB1D2638080094387C /* Crashlytics.framework in Frameworks */,
+				41EA8CCA1D2638080094387C /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,6 +55,8 @@
 			children = (
 				41EA8CAA1D26357A0094387C /* BreakOut Demo */,
 				41EA8CA91D2635790094387C /* Products */,
+				41EA8CC81D2638080094387C /* Fabric.framework */,
+				41EA8CC91D2638080094387C /* Crashlytics.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +105,7 @@
 				41EA8CA41D2635790094387C /* Sources */,
 				41EA8CA51D2635790094387C /* Frameworks */,
 				41EA8CA61D2635790094387C /* Resources */,
+				41EA8CC71D2637E60094387C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -152,6 +161,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		41EA8CC71D2637E60094387C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run 326924495c928c921e1a5b32ff937a1b8fa7d643 a0a12dbfd14489e1b7c52148805d8707bb1e974a642ee0d1e6edc4d982bfa21f";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		41EA8CA41D2635790094387C /* Sources */ = {
@@ -275,6 +300,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "BreakOut Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cat.sebasbad.BreakOut-Demo";
@@ -286,6 +315,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "BreakOut Demo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "cat.sebasbad.BreakOut-Demo";
