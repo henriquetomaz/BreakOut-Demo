@@ -77,10 +77,10 @@
 			children = (
 				41EA8CAE1D26357A0094387C /* AppDelegate.h */,
 				41EA8CAF1D26357A0094387C /* AppDelegate.m */,
+				41D6C9951D330A52007D93DB /* GameStart.sks */,
 				41EA8CB11D26357A0094387C /* GameScene.h */,
 				41EA8CB21D26357A0094387C /* GameScene.m */,
 				41EA8CB41D26357A0094387C /* GameScene.sks */,
-				41D6C9951D330A52007D93DB /* GameStart.sks */,
 				41D6C9971D330AA3007D93DB /* GameOver.sks */,
 				41EA8CB61D26357A0094387C /* GameViewController.h */,
 				41EA8CB71D26357A0094387C /* GameViewController.m */,
