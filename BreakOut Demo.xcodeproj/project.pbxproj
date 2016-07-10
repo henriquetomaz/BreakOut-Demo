@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		41D6C9961D330A52007D93DB /* GameStart.sks in Resources */ = {isa = PBXBuildFile; fileRef = 41D6C9951D330A52007D93DB /* GameStart.sks */; };
+		41D6C9981D330AA3007D93DB /* GameOver.sks in Resources */ = {isa = PBXBuildFile; fileRef = 41D6C9971D330AA3007D93DB /* GameOver.sks */; };
 		41EA8CAD1D26357A0094387C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EA8CAC1D26357A0094387C /* main.m */; };
 		41EA8CB01D26357A0094387C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EA8CAF1D26357A0094387C /* AppDelegate.m */; };
 		41EA8CB31D26357A0094387C /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EA8CB21D26357A0094387C /* GameScene.m */; };
@@ -22,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		41D6C9951D330A52007D93DB /* GameStart.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameStart.sks; sourceTree = "<group>"; };
+		41D6C9971D330AA3007D93DB /* GameOver.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameOver.sks; sourceTree = "<group>"; };
 		41EA8CA81D2635790094387C /* BreakOut Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "BreakOut Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		41EA8CAC1D26357A0094387C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		41EA8CAE1D26357A0094387C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				41EA8CB21D26357A0094387C /* GameScene.m */,
 				41EA8CB41D26357A0094387C /* GameScene.sks */,
 				41D6C9951D330A52007D93DB /* GameStart.sks */,
+				41D6C9971D330AA3007D93DB /* GameOver.sks */,
 				41EA8CB61D26357A0094387C /* GameViewController.h */,
 				41EA8CB71D26357A0094387C /* GameViewController.m */,
 				41EA8CB91D26357A0094387C /* Main.storyboard */,
@@ -157,6 +160,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41EA8CB51D26357A0094387C /* GameScene.sks in Resources */,
+				41D6C9981D330AA3007D93DB /* GameOver.sks in Resources */,
 				41EA8CC01D26357A0094387C /* LaunchScreen.storyboard in Resources */,
 				41D6C9961D330A52007D93DB /* GameStart.sks in Resources */,
 				41EA8CBD1D26357A0094387C /* Assets.xcassets in Resources */,
