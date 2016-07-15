@@ -23,7 +23,7 @@
         
         // Create and configure the scene.
         GameOver *scene = [GameOver nodeWithFileNamed:@"GameOver"];
-        scene.scaleMode = SKSceneScaleModeAspectFill;
+        scene.scaleMode = SKSceneScaleModeAspectFit;
         
         // Present the scene.
         [skView presentScene:scene];
