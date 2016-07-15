@@ -7,6 +7,7 @@
 //
 
 #import "GameScene.h"
+#import "GameOver.h"
 
 @implementation GameScene
 
@@ -25,22 +26,19 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     /* Called when a touch begins */
     
-    for (UITouch *touch in touches) {
-        CGPoint location = [touch locationInNode:self];
+    if (touches) {
+        // Configure the view.
+        SKView * skView = (SKView *)self.view;
         
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
+        // Create and configure the scene.
+        GameOver *scene = [GameOver nodeWithFileNamed:@"GameOver"];
+        scene.scaleMode = SKSceneScaleModeAspectFill;
         
-        sprite.xScale = 0.5;
-        sprite.yScale = 0.5;
-        sprite.position = location;
-        
-        SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
-        
-        [sprite runAction:[SKAction repeatActionForever:action]];
-        
-        [self addChild:sprite];
+        // Present the scene.
+        [skView presentScene:scene];
     }
 }
+
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
