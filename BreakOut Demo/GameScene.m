@@ -27,6 +27,18 @@
     ball1.physicsBody.allowsRotation = NO;
     ball1.physicsBody.mass = 1.0;
     ball1.physicsBody.velocity = CGVectorMake(200.0, 200.0);
+    
+    SKSpriteNode *ball2 = [SKSpriteNode spriteNodeWithImageNamed:@"Green Ball.png"];
+    ball2.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:ball1.size.width/2];
+    ball2.physicsBody.dynamic = YES;
+    ball2.position = CGPointMake(300, self.size.height/2);
+    ball2.physicsBody.friction = 0.0;
+    ball2.physicsBody.restitution = 1.0;
+    ball2.physicsBody.linearDamping = 0.0;
+    ball2.physicsBody.angularDamping = 0.0;
+    ball2.physicsBody.allowsRotation = NO;
+    ball2.physicsBody.mass = 1.0;
+    ball2.physicsBody.velocity = CGVectorMake(200.0, 200.0);
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
