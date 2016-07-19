@@ -42,6 +42,16 @@
     
     [self addChild:ball1];
     [self addChild:ball2];
+    
+    CGPoint ball1Anchor = CGPointMake(ball1.position.x, ball1.position.y);
+    CGPoint ball2Anchor = CGPointMake(ball2.position.x, ball2.position.y);
+    
+    SKPhysicsJointSpring *joint = [SKPhysicsJointSpring jointWithBodyA:ball1.physicsBody bodyB:ball2.physicsBody anchorA:ball1Anchor anchorB:ball2Anchor];
+    
+    joint.damping = 0.0;
+    joint.frequency = 1.5;
+    
+    [self.scene.physicsWorld addJoint:joint];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
