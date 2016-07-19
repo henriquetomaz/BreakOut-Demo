@@ -12,6 +12,9 @@
 @implementation GameScene
 
 -(void)didMoveToView:(SKView *)view {
+    
+    // set scene (aka root SKNode) physics body borders as the scene edges
+    self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
