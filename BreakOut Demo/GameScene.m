@@ -15,6 +15,18 @@
     
     // set scene (aka root SKNode) physics body borders as the scene edges
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
+    
+    SKSpriteNode *ball1 = [SKSpriteNode spriteNodeWithImageNamed:@"Blue Ball.png"];
+    ball1.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:ball1.size.width/2];
+    ball1.physicsBody.dynamic = YES;
+    ball1.position = CGPointMake(100, self.size.height/2);
+    ball1.physicsBody.friction = 0.0;
+    ball1.physicsBody.restitution = 1.0;
+    ball1.physicsBody.linearDamping = 0.0;
+    ball1.physicsBody.angularDamping = 0.0;
+    ball1.physicsBody.allowsRotation = NO;
+    ball1.physicsBody.mass = 1.0;
+    ball1.physicsBody.velocity = CGVectorMake(200.0, 200.0);
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
