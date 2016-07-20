@@ -92,6 +92,21 @@ static const CGFloat kTrackPointsPerSecond = 1000;
     }
 }
 
+-(void)trackPaddlesToMotivatingTouches {
+    
+    SKNode *node = [self childNodeWithName:@"Paddle"];
+    UITouch *touch = self.motivatingTuoch;
+    
+    if (!touch) {
+        return;
+    }
+    
+    CGFloat touchXPos = [touch locationInNode:self].x;
+    
+    NSTimeInterval duration = ABS(touchXPos - node.position.x) / kTrackPointsPerSecond;
+    [node runAction:[SKAction moveToX:touchXPos duration:duration]];
+    
+}
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
