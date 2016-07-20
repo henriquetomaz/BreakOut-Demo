@@ -17,6 +17,8 @@
 
 @implementation GameScene
 
+static const CGFloat kTrackPointsPerSecond = 1000;
+
 -(void)didMoveToView:(SKView *)view {
     
     // set scene (aka root SKNode) physics body borders as the scene edges
