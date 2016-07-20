@@ -38,7 +38,7 @@
     ball2.physicsBody.angularDamping = 0.0;
     ball2.physicsBody.allowsRotation = NO;
     ball2.physicsBody.mass = 1.0;
-    ball2.physicsBody.velocity = CGVectorMake(0.0, 220.0); // initial velocity
+    ball2.physicsBody.velocity = CGVectorMake(0.0, 0.0); // initial velocity
     
     [self addChild:ball1];
     [self addChild:ball2];
