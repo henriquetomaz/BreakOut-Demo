@@ -47,6 +47,7 @@
     ball2.physicsBody.velocity = CGVectorMake(0.0, 0.0); // initial velocity
     
     SKSpriteNode *paddle = [SKSpriteNode spriteNodeWithImageNamed:@"Paddle.png"];
+    paddle.name = @"Paddle";
     paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:paddle.size];
     paddle.physicsBody.dynamic = NO; // doesn't move by itself
     paddle.position = CGPointMake(self.size.width/2, 100);
