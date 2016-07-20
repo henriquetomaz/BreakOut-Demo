@@ -9,6 +9,12 @@
 #import "GameScene.h"
 #import "GameOver.h"
 
+@interface GameScene()
+
+@property (nonatomic, strong, nullable) UITouch *motivatingTuoch;
+
+@end
+
 @implementation GameScene
 
 -(void)didMoveToView:(SKView *)view {
