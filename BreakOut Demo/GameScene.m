@@ -40,8 +40,21 @@
     ball2.physicsBody.mass = 1.0;
     ball2.physicsBody.velocity = CGVectorMake(0.0, 0.0); // initial velocity
     
+    SKSpriteNode *paddle = [SKSpriteNode spriteNodeWithImageNamed:@"Paddle.png"];
+    paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:paddle.size];
+    paddle.physicsBody.dynamic = NO; // doesn't move by itself
+    paddle.position = CGPointMake(self.size.width/2, 100);
+    paddle.physicsBody.friction = 0.0;
+    paddle.physicsBody.restitution = 1.0;
+    paddle.physicsBody.linearDamping = 0.0;
+    paddle.physicsBody.angularDamping = 0.0;
+    paddle.physicsBody.allowsRotation = NO;
+    paddle.physicsBody.mass = 1.0;
+    paddle.physicsBody.velocity = CGVectorMake(0.0, 0.0); // initial velocity
+    
     [self addChild:ball1];
     [self addChild:ball2];
+    [self addChild:paddle];
     
     CGPoint ball1Anchor = CGPointMake(ball1.position.x, ball1.position.y);
     CGPoint ball2Anchor = CGPointMake(ball2.position.x, ball2.position.y);
