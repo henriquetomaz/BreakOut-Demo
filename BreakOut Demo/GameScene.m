@@ -77,18 +77,18 @@ static const CGFloat kTrackPointsPerSecond = 1000;
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    /* Called when a touch begins */
     
-    if (touches) {
-        // Configure the view.
-        SKView * skView = (SKView *)self.view;
-        
-        // Create and configure the scene.
-        GameOver *scene = [GameOver nodeWithFileNamed:@"GameOver"];
-        scene.scaleMode = SKSceneScaleModeAspectFit;
-        
-        // Present the scene.
-        [skView presentScene:scene];
+    const CGRect touchRegion = CGRectMake(0, 0, self.size.width, self.size.height * 0.3);
+    
+    for (UITouch *touch in touches) {
+        CGPoint point = [touch locationInNode:self];
+        if (CGRectContainsPoint(touchRegion, point)) {
+            self.motivatingTuoch = touch;
+        }
+    }
+    
+    [self trackPaddlesToMotivatingTouches];
+}
     }
 }
 
