@@ -55,6 +55,33 @@ platform :ios do
     scan
   end
 
+  desc "Bump patch"
+  lane :bump_patch do
+    increment_build_number
+    increment_version_number(bump_type:"patch")
+    git_commit_bump("Version")
+  end
+
+  desc "Bump minor"
+  lane :bump_minor do
+    increment_build_number
+    increment_version_number(bump_type:"minor")
+    git_commit_bump("Version")
+  end
+
+  desc "Bump major"
+  lane :bump_major do
+    increment_build_number
+    increment_version_number(bump_type:"major")
+    git_commit_bump("Version")
+  end
+
+  desc "Bump build"
+  lane :bump_build do
+    increment_build_number
+    git_commit_bump("Build")
+  end
+
   desc "Build and distribute build to Crashlytics"
   desc "This will also make sure the profile is up to date"
   lane :crashlytics_beta do
