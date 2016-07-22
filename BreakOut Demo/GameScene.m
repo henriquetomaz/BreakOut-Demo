@@ -89,6 +89,11 @@ static const CGFloat kTrackPointsPerSecond = 1000;
     
     [self trackPaddlesToMotivatingTouches];
 }
+
+-(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    // the reference to the motivating touch is the same as when the touches began
+    [self trackPaddlesToMotivatingTouches];
+}
     }
 }
 
