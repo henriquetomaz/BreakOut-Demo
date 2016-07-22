@@ -94,6 +94,16 @@ static const CGFloat kTrackPointsPerSecond = 1000;
     // the reference to the motivating touch is the same as when the touches began
     [self trackPaddlesToMotivatingTouches];
 }
+
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if ([touches containsObject:self.motivatingTuoch]) {
+        self.motivatingTuoch = nil;
+    }
+}
+
+-(void)touchesCancelled:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if ([touches containsObject:self.motivatingTuoch]) {
+        self.motivatingTuoch = nil;
     }
 }
 
