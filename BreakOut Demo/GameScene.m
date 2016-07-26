@@ -16,7 +16,7 @@ static const uint32_t category_paddle   = 0x1 < 2; // 0x000000000000000000000000
 static const uint32_t category_block    = 0x1 < 1; // 0x00000000000000000000000000000010
 static const uint32_t category_ball     = 0x1 < 0; // 0x00000000000000000000000000000001
 
-@interface GameScene()
+@interface GameScene() <SKPhysicsContactDelegate>
 
 @property (nonatomic, strong, nullable) UITouch *motivatingTuoch;
 
