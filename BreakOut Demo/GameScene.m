@@ -9,6 +9,8 @@
 #import "GameScene.h"
 #import "GameOver.h"
 
+static const CGFloat kTrackPointsPerSecond = 1000;
+
 @interface GameScene()
 
 @property (nonatomic, strong, nullable) UITouch *motivatingTuoch;
@@ -16,8 +18,6 @@
 @end
 
 @implementation GameScene
-
-static const CGFloat kTrackPointsPerSecond = 1000;
 
 -(void)didMoveToView:(SKView *)view {
     
