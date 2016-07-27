@@ -81,6 +81,7 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
     ball2.physicsBody.categoryBitMask = category_ball;
     ball2.physicsBody.collisionBitMask = category_fence || category_ball || category_block || category_paddle;
     ball2.physicsBody.contactTestBitMask = category_fence || category_block;
+    ball2.physicsBody.usesPreciseCollisionDetection = YES;
     
     SKSpriteNode *paddle = [SKSpriteNode spriteNodeWithImageNamed:@"Paddle.png"];
     paddle.name = @"Paddle";
