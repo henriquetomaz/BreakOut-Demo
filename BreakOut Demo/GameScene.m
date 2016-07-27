@@ -26,6 +26,9 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
 
 -(void)didMoveToView:(SKView *)view {
     
+    // set scene (aka root SKNode) node name
+    self.name = @"Fence";
+    
     // set scene (aka root SKNode) physics body borders as the scene edges
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
     
