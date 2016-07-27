@@ -42,6 +42,10 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
     background.zPosition = 0; // Which 2D layer ? Layer 0 
     
     SKSpriteNode *ball1 = [SKSpriteNode spriteNodeWithImageNamed:@"Blue Ball.png"];
+    ball1.name = @"Ball1";
+    ball1.position = CGPointMake(60, 30); // give the player a chance to play befor the ball hits the fence
+    ball1.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
+    
     ball1.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:ball1.size.width/2];
     ball1.physicsBody.dynamic = YES;
     ball1.position = CGPointMake(100, self.size.height/2);
