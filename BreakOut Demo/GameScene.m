@@ -78,6 +78,9 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
     ball2.physicsBody.mass = 1.0;
     ball2.physicsBody.velocity = CGVectorMake(0.0, 0.0); // initial velocity
     ball2.physicsBody.affectedByGravity = NO;
+    ball2.physicsBody.categoryBitMask = category_ball;
+    ball2.physicsBody.collisionBitMask = category_fence || category_ball || category_block || category_paddle;
+    ball2.physicsBody.contactTestBitMask = category_fence || category_block;
     
     SKSpriteNode *paddle = [SKSpriteNode spriteNodeWithImageNamed:@"Paddle.png"];
     paddle.name = @"Paddle";
