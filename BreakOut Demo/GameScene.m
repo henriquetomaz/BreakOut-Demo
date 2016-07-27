@@ -37,6 +37,10 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
     self.physicsBody.contactTestBitMask = 0x0; // no callback when something hits the fence
     
     self.physicsWorld.contactDelegate = self;
+    
+    SKSpriteNode *background = (SKSpriteNode * )[self childNodeWithName:@"Background"];
+    background.zPosition = 0; // Which 2D layer ? Layer 0 
+    
     SKSpriteNode *ball1 = [SKSpriteNode spriteNodeWithImageNamed:@"Blue Ball.png"];
     ball1.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:ball1.size.width/2];
     ball1.physicsBody.dynamic = YES;
