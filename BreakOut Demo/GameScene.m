@@ -56,6 +56,7 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
     ball1.physicsBody.allowsRotation = NO;
     ball1.physicsBody.mass = 1.0;
     ball1.physicsBody.velocity = CGVectorMake(200.0, 200.0); // initial velocity
+    ball1.physicsBody.affectedByGravity = NO;
     ball1.physicsBody.categoryBitMask = category_ball;
     ball1.physicsBody.collisionBitMask = category_fence || category_ball || category_block || category_paddle;
     ball1.physicsBody.contactTestBitMask = category_fence || category_block;
