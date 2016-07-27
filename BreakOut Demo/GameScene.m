@@ -63,6 +63,10 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
     ball1.physicsBody.usesPreciseCollisionDetection = YES;
     
     SKSpriteNode *ball2 = [SKSpriteNode spriteNodeWithImageNamed:@"Green Ball.png"];
+    ball2.name = @"Ball2";
+    ball2.position = CGPointMake(60, 75); // give the player a chance to play befor the ball hits the fence
+    ball2.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
+    
     ball2.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:ball1.size.width/2];
     ball2.physicsBody.dynamic = YES;
     ball2.position = CGPointMake(300, self.size.height/2);
