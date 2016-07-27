@@ -62,6 +62,8 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
     ball1.physicsBody.contactTestBitMask = category_fence || category_block;
     ball1.physicsBody.usesPreciseCollisionDetection = YES;
     
+    [self addChild:ball1];
+    
     SKSpriteNode *ball2 = [SKSpriteNode spriteNodeWithImageNamed:@"Green Ball.png"];
     ball2.name = @"Ball2";
     ball2.position = CGPointMake(60, 75); // give the player a chance to play befor the ball hits the fence
@@ -96,7 +98,7 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
     paddle.physicsBody.mass = 1.0;
     paddle.physicsBody.velocity = CGVectorMake(0.0, 0.0); // initial velocity
     
-    [self addChild:ball1];
+    
     [self addChild:ball2];
     [self addChild:paddle];
     
