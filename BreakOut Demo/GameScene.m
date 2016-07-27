@@ -77,6 +77,7 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
     ball2.physicsBody.allowsRotation = NO;
     ball2.physicsBody.mass = 1.0;
     ball2.physicsBody.velocity = CGVectorMake(0.0, 0.0); // initial velocity
+    ball2.physicsBody.affectedByGravity = NO;
     
     SKSpriteNode *paddle = [SKSpriteNode spriteNodeWithImageNamed:@"Paddle.png"];
     paddle.name = @"Paddle";
