@@ -35,6 +35,8 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
     self.physicsBody.categoryBitMask = category_fence;
     self.physicsBody.collisionBitMask = 0x0; // nothing colligding with the fence should move the fence
     self.physicsBody.contactTestBitMask = 0x0; // no callback when something hits the fence
+    
+    self.physicsWorld.contactDelegate = self;
     SKSpriteNode *ball1 = [SKSpriteNode spriteNodeWithImageNamed:@"Blue Ball.png"];
     ball1.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:ball1.size.width/2];
     ball1.physicsBody.dynamic = YES;
