@@ -123,6 +123,99 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
     joint.frequency = 1.5;
     
     [self.scene.physicsWorld addJoint:joint];
+    
+    // Add blocks
+    SKSpriteNode *block = [SKSpriteNode spriteNodeWithImageNamed:@"Block"];
+    
+    CGFloat kBlockWidth = block.size.width;
+    CGFloat kBlockHeight = block.size.height;
+    CGFloat kBlockHorizontalSpace = 20.0f;
+    int kBlocksPerRow = self.size.width / (kBlockWidth + kBlockHorizontalSpace);
+    
+    for (int i = 0; i < kBlocksPerRow; i++) {
+        block = [SKSpriteNode spriteNodeWithImageNamed:@"Block"];
+        block.name = @"Block";
+        block.position = CGPointMake(kBlockHorizontalSpace/2 + kBlockWidth/2 + i*kBlockWidth + i*kBlockHorizontalSpace, self.size.height - 100);
+        block.zPosition = 1;
+//        block.lightingBitMask = 0x1;
+        
+        block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size center:CGPointMake(0, 0)];
+        block.physicsBody.dynamic = NO; // doesn't move by itself
+        block.position = CGPointMake(self.size.width/2, 100);
+        block.physicsBody.friction = 0.0;
+        block.physicsBody.restitution = 1.0;
+        block.physicsBody.linearDamping = 0.0;
+        block.physicsBody.angularDamping = 0.0;
+        block.physicsBody.allowsRotation = NO;
+        block.physicsBody.mass = 1.0;
+        block.physicsBody.velocity = CGVectorMake(0.0, 0.0); // initial velocity
+        block.physicsBody.categoryBitMask = category_block;
+        // affected by collisions with
+        block.physicsBody.collisionBitMask = 0x0;
+        // callbacks when in contact with
+        block.physicsBody.contactTestBitMask = category_ball;
+        block.physicsBody.usesPreciseCollisionDetection = NO;
+        
+        [self addChild:block];
+    }
+    
+    kBlocksPerRow = (self.size.width / (kBlockWidth + kBlockHorizontalSpace)) - 2;
+    
+    for (int i = 0; i < kBlocksPerRow; i++) {
+        block = [SKSpriteNode spriteNodeWithImageNamed:@"Block"];
+        block.name = @"Block";
+        block.position = CGPointMake(kBlockHorizontalSpace + kBlockWidth + i*kBlockWidth + i*kBlockHorizontalSpace, self.size.height - 100 - (1.5 * kBlockHeight));
+        block.zPosition = 1;
+        //        block.lightingBitMask = 0x1;
+        
+        block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size center:CGPointMake(0, 0)];
+        block.physicsBody.dynamic = NO; // doesn't move by itself
+        block.position = CGPointMake(self.size.width/2, 100);
+        block.physicsBody.friction = 0.0;
+        block.physicsBody.restitution = 1.0;
+        block.physicsBody.linearDamping = 0.0;
+        block.physicsBody.angularDamping = 0.0;
+        block.physicsBody.allowsRotation = NO;
+        block.physicsBody.mass = 1.0;
+        block.physicsBody.velocity = CGVectorMake(0.0, 0.0); // initial velocity
+        block.physicsBody.categoryBitMask = category_block;
+        // affected by collisions with
+        block.physicsBody.collisionBitMask = 0x0;
+        // callbacks when in contact with
+        block.physicsBody.contactTestBitMask = category_ball;
+        block.physicsBody.usesPreciseCollisionDetection = NO;
+        
+        [self addChild:block];
+    }
+    
+    kBlocksPerRow = self.size.width / (kBlockWidth + kBlockHorizontalSpace);
+    
+    for (int i = 0; i < kBlocksPerRow; i++) {
+        block = [SKSpriteNode spriteNodeWithImageNamed:@"Block"];
+        block.name = @"Block";
+        block.position = CGPointMake(kBlockHorizontalSpace + kBlockWidth + i*kBlockWidth + i*kBlockHorizontalSpace, self.size.height - 100 - (3 * kBlockHeight));
+        block.zPosition = 1;
+        //        block.lightingBitMask = 0x1;
+        
+        block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size center:CGPointMake(0, 0)];
+        block.physicsBody.dynamic = NO; // doesn't move by itself
+        block.position = CGPointMake(self.size.width/2, 100);
+        block.physicsBody.friction = 0.0;
+        block.physicsBody.restitution = 1.0;
+        block.physicsBody.linearDamping = 0.0;
+        block.physicsBody.angularDamping = 0.0;
+        block.physicsBody.allowsRotation = NO;
+        block.physicsBody.mass = 1.0;
+        block.physicsBody.velocity = CGVectorMake(0.0, 0.0); // initial velocity
+        block.physicsBody.categoryBitMask = category_block;
+        // affected by collisions with
+        block.physicsBody.collisionBitMask = 0x0;
+        // callbacks when in contact with
+        block.physicsBody.contactTestBitMask = category_ball;
+        block.physicsBody.usesPreciseCollisionDetection = NO;
+        
+        [self addChild:block];
+    }
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
