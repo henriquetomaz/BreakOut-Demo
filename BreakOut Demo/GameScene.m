@@ -85,6 +85,8 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
     ball2.physicsBody.contactTestBitMask = category_fence || category_block;
     ball2.physicsBody.usesPreciseCollisionDetection = YES;
     
+    [self addChild:ball2];
+    
     SKSpriteNode *paddle = [SKSpriteNode spriteNodeWithImageNamed:@"Paddle.png"];
     paddle.name = @"Paddle";
     paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:paddle.size];
@@ -98,8 +100,6 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
     paddle.physicsBody.mass = 1.0;
     paddle.physicsBody.velocity = CGVectorMake(0.0, 0.0); // initial velocity
     
-    
-    [self addChild:ball2];
     [self addChild:paddle];
     
     CGPoint ball1Anchor = CGPointMake(ball1.position.x, ball1.position.y);
