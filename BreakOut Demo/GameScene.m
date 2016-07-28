@@ -93,6 +93,8 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
     
     SKSpriteNode *paddle = [SKSpriteNode spriteNodeWithImageNamed:@"Paddle.png"];
     paddle.name = @"Paddle";
+    paddle.position = CGPointMake(self.size.width/2, 100);
+    paddle.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
     paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:paddle.size];
     paddle.physicsBody.dynamic = NO; // doesn't move by itself
     paddle.position = CGPointMake(self.size.width/2, 100);
