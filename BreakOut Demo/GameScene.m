@@ -110,6 +110,7 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
     paddle.physicsBody.collisionBitMask = 0x0;
     // callbacks when in contact with
     paddle.physicsBody.contactTestBitMask = category_ball;
+    paddle.physicsBody.usesPreciseCollisionDetection = YES;
     
     [self addChild:paddle];
     
