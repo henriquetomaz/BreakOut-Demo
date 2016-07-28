@@ -269,4 +269,29 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
     /* Called before each frame is rendered */
 }
 
+-(void)didBeginContact:(SKPhysicsContact *)contact {
+    
+    NSString *nameA = contact.bodyA.node.name;
+    NSString *nameB = contact.bodyB.node.name;
+    
+    if (([nameA containsString:@"Fence"] && [nameB containsString:@"Ball"]) || ([nameA containsString:@"Ball"] && [nameB containsString:@"Fence"]) ) {
+        
+        // You missed the ball - Game Over
+        if (10 > contact.contactPoint.y) {
+            
+            SKView *skView = (SKView *)self.view;
+            [self removeFromParent];
+            
+            // Create and configure the scene
+            GameOver *gameOverScene = [GameOver nodeWithFileNamed:@"GameOver"];
+            gameOverScene.scaleMode = SKSceneScaleModeAspectFill;
+            
+            // Present the scene
+            [skView presentScene:gameOverScene];
+        }
+    }
+    
+    NSLog(@"What collided ? %@ %@", nameA, nameB);
+}
+
 @end
