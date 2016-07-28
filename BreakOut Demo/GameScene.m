@@ -105,6 +105,11 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
     paddle.physicsBody.allowsRotation = NO;
     paddle.physicsBody.mass = 1.0;
     paddle.physicsBody.velocity = CGVectorMake(0.0, 0.0); // initial velocity
+    paddle.physicsBody.categoryBitMask = category_paddle;
+    // affected by collisions with
+    paddle.physicsBody.collisionBitMask = 0x0;
+    // callbacks when in contact with
+    paddle.physicsBody.contactTestBitMask = category_ball;
     
     [self addChild:paddle];
     
