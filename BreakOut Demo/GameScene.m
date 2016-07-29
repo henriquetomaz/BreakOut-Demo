@@ -136,7 +136,7 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
         block = [SKSpriteNode spriteNodeWithImageNamed:@"Block"];
         block.name = @"Block";
         block.position = CGPointMake(kBlockHorizontalSpace/2 + kBlockWidth/2 + i*kBlockWidth + i*kBlockHorizontalSpace, self.size.height - 100);
-        block.zPosition = 1;
+        block.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
 //        block.lightingBitMask = 0x1;
         
         block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size center:CGPointMake(0, 0)];
@@ -165,7 +165,7 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
         block = [SKSpriteNode spriteNodeWithImageNamed:@"Block"];
         block.name = @"Block";
         block.position = CGPointMake(kBlockHorizontalSpace + kBlockWidth + i*kBlockWidth + i*kBlockHorizontalSpace, self.size.height - 100 - (1.5 * kBlockHeight));
-        block.zPosition = 1;
+        block.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
         //        block.lightingBitMask = 0x1;
         
         block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size center:CGPointMake(0, 0)];
@@ -194,7 +194,7 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
         block = [SKSpriteNode spriteNodeWithImageNamed:@"Block"];
         block.name = @"Block";
         block.position = CGPointMake(kBlockHorizontalSpace + kBlockWidth + i*kBlockWidth + i*kBlockHorizontalSpace, self.size.height - 100 - (3 * kBlockHeight));
-        block.zPosition = 1;
+        block.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
         //        block.lightingBitMask = 0x1;
         
         block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size center:CGPointMake(0, 0)];
