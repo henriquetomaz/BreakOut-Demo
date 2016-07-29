@@ -125,7 +125,7 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
     [self.scene.physicsWorld addJoint:joint];
     
     // Add blocks
-    SKSpriteNode *block = [SKSpriteNode spriteNodeWithImageNamed:@"Block"];
+    SKSpriteNode *block = [SKSpriteNode spriteNodeWithImageNamed:@"Block.png"];
     
     CGFloat kBlockWidth = block.size.width;
     CGFloat kBlockHeight = block.size.height;
@@ -133,7 +133,7 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
     int kBlocksPerRow = self.size.width / (kBlockWidth + kBlockHorizontalSpace);
     
     for (int i = 0; i < kBlocksPerRow; i++) {
-        block = [SKSpriteNode spriteNodeWithImageNamed:@"Block"];
+        block = [SKSpriteNode spriteNodeWithImageNamed:@"Block.png"];
         block.name = @"Block";
         block.position = CGPointMake(kBlockHorizontalSpace/2 + kBlockWidth/2 + i*kBlockWidth + i*kBlockHorizontalSpace, self.size.height - 100);
         block.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
@@ -161,7 +161,7 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
     kBlocksPerRow = (self.size.width / (kBlockWidth + kBlockHorizontalSpace)) - 2;
     
     for (int i = 0; i < kBlocksPerRow; i++) {
-        block = [SKSpriteNode spriteNodeWithImageNamed:@"Block"];
+        block = [SKSpriteNode spriteNodeWithImageNamed:@"Block.png"];
         block.name = @"Block";
         block.position = CGPointMake(kBlockHorizontalSpace + kBlockWidth + i*kBlockWidth + i*kBlockHorizontalSpace, self.size.height - 100 - (1.5 * kBlockHeight));
         block.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
@@ -189,7 +189,7 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
     kBlocksPerRow = self.size.width / (kBlockWidth + kBlockHorizontalSpace);
     
     for (int i = 0; i < kBlocksPerRow; i++) {
-        block = [SKSpriteNode spriteNodeWithImageNamed:@"Block"];
+        block = [SKSpriteNode spriteNodeWithImageNamed:@"Block.png"];
         block.name = @"Block";
         block.position = CGPointMake(kBlockHorizontalSpace + kBlockWidth + i*kBlockWidth + i*kBlockHorizontalSpace, self.size.height - 100 - (3 * kBlockHeight));
         block.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
