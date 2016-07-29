@@ -264,6 +264,33 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
+    
+    static const int kMaxSpeed = 1500;
+    static const int kMinSpeed = 400;
+    
+    // Adjust the linear damping if the ball starts moving a little too fast or slow
+    SKNode *ball1 = [self childNodeWithName:@"Ball1"];
+    SKNode *ball2 = [self childNodeWithName:@"Ball2"];
+    
+    float dx = (ball1.physicsBody.velocity.dx + ball2.physicsBody.velocity.dx) / 2;
+    float dy = (ball1.physicsBody.velocity.dy + ball2.physicsBody.velocity.dy) / 2;
+    float speed = sqrtf(dx * dx + dy * dy);
+    
+    if (kMaxSpeed < speed) {
+        ball1.physicsBody.linearDamping += 0.1f;
+        ball2.physicsBody.linearDamping += 0.1f;
+//        ball2.physicsBody.velocity = CGVectorMake(ball2.physicsBody.velocity.dx * 0.9, ball2.physicsBody.velocity.dy * 0.9);
+    } else if (kMinSpeed > speed) {
+        ball1.physicsBody.linearDamping -= 0.1f;
+        ball2.physicsBody.linearDamping -= 0.1f;
+        //        ball2.physicsBody.velocity = CGVectorMake(ball2.physicsBody.velocity.dx * 1.1, ball2.physicsBody.velocity.dy * 1.1);
+    } else {
+        ball1.physicsBody.linearDamping = 0.0f;
+        ball2.physicsBody.linearDamping = 0.0f;
+    }
+    
+//    NSLog(@"ball1 %f %f", ball1.position.x, ball1.position.y);
+    
 }
 
 -(void)didBeginContact:(SKPhysicsContact *)contact {
