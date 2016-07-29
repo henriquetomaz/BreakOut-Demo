@@ -74,6 +74,9 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
     light.lightColor = [UIColor colorWithRed:0.7 green:0.7 blue:1.0 alpha:1.0];
     light.ambientColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
     light.zPosition = 1;
+    
+    [ball1 addChild:light];
+    
     SKSpriteNode *ball2 = [SKSpriteNode spriteNodeWithImageNamed:@"Green Ball.png"];
     ball2.name = @"Ball2";
     ball2.position = CGPointMake(60, 75); // give the player a chance to play befor the ball hits the fence
