@@ -39,7 +39,8 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
     self.physicsWorld.contactDelegate = self;
     
     SKSpriteNode *background = (SKSpriteNode * )[self childNodeWithName:@"Background"];
-    background.zPosition = 0; // Which 2D layer ? Layer 0 
+    background.zPosition = 0; // Which 2D layer ? Layer 0
+    background.lightingBitMask = 0x1;
     
     SKSpriteNode *ball1 = [SKSpriteNode spriteNodeWithImageNamed:@"Blue Ball.png"];
     ball1.name = @"Ball1";
@@ -106,6 +107,8 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
     paddle.name = @"Paddle";
     paddle.position = CGPointMake(self.size.width/2, 100);
     paddle.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
+    paddle.lightingBitMask = 0x1;
+    
     paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:paddle.size];
     paddle.physicsBody.dynamic = NO; // doesn't move by itself
     paddle.position = CGPointMake(self.size.width/2, 100);
@@ -148,7 +151,7 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
         block.name = @"Block";
         block.position = CGPointMake(kBlockHorizontalSpace/2 + kBlockWidth/2 + i*kBlockWidth + i*kBlockHorizontalSpace, self.size.height - 100);
         block.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
-//        block.lightingBitMask = 0x1;
+        block.lightingBitMask = 0x1;
         
         block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size center:CGPointMake(0, 0)];
         block.physicsBody.dynamic = NO; // doesn't move by itself
@@ -176,7 +179,7 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
         block.name = @"Block";
         block.position = CGPointMake(kBlockHorizontalSpace + kBlockWidth + i*kBlockWidth + i*kBlockHorizontalSpace, self.size.height - 100 - (1.5 * kBlockHeight));
         block.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
-        //        block.lightingBitMask = 0x1;
+        block.lightingBitMask = 0x1;
         
         block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size center:CGPointMake(0, 0)];
         block.physicsBody.dynamic = NO; // doesn't move by itself
@@ -204,7 +207,7 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
         block.name = @"Block";
         block.position = CGPointMake(kBlockHorizontalSpace + kBlockWidth + i*kBlockWidth + i*kBlockHorizontalSpace, self.size.height - 100 - (3 * kBlockHeight));
         block.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
-        //        block.lightingBitMask = 0x1;
+        block.lightingBitMask = 0x1;
         
         block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size center:CGPointMake(0, 0)];
         block.physicsBody.dynamic = NO; // doesn't move by itself
