@@ -141,7 +141,6 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
         
         block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size center:CGPointMake(0, 0)];
         block.physicsBody.dynamic = NO; // doesn't move by itself
-        block.position = CGPointMake(self.size.width/2, 100);
         block.physicsBody.friction = 0.0;
         block.physicsBody.restitution = 1.0;
         block.physicsBody.linearDamping = 0.0;
@@ -170,7 +169,6 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
         
         block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size center:CGPointMake(0, 0)];
         block.physicsBody.dynamic = NO; // doesn't move by itself
-        block.position = CGPointMake(self.size.width/2, 100);
         block.physicsBody.friction = 0.0;
         block.physicsBody.restitution = 1.0;
         block.physicsBody.linearDamping = 0.0;
@@ -199,7 +197,6 @@ static const uint32_t category_ball     = 0x1 < 0; // 0x000000000000000000000000
         
         block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size center:CGPointMake(0, 0)];
         block.physicsBody.dynamic = NO; // doesn't move by itself
-        block.position = CGPointMake(self.size.width/2, 100);
         block.physicsBody.friction = 0.0;
         block.physicsBody.restitution = 1.0;
         block.physicsBody.linearDamping = 0.0;
