@@ -59,9 +59,9 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
     ball1.physicsBody.affectedByGravity = NO;
     ball1.physicsBody.categoryBitMask = category_ball;
     // affected by collisions with
-    ball1.physicsBody.collisionBitMask = category_fence || category_ball || category_block || category_paddle;
+    ball1.physicsBody.collisionBitMask = category_fence | category_ball | category_block | category_paddle;
     // callbacks when in contact with
-    ball1.physicsBody.contactTestBitMask = category_fence || category_block;
+    ball1.physicsBody.contactTestBitMask = category_fence | category_block;
     ball1.physicsBody.usesPreciseCollisionDetection = YES;
     
     [self addChild:ball1];
@@ -84,9 +84,9 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
     ball2.physicsBody.affectedByGravity = NO;
     ball2.physicsBody.categoryBitMask = category_ball;
     // affected by collisions with
-    ball2.physicsBody.collisionBitMask = category_fence || category_ball || category_block || category_paddle;
+    ball2.physicsBody.collisionBitMask = category_fence | category_ball | category_block | category_paddle;
     // callbacks when in contact with
-    ball2.physicsBody.contactTestBitMask = category_fence || category_block;
+    ball2.physicsBody.contactTestBitMask = category_fence | category_block;
     ball2.physicsBody.usesPreciseCollisionDetection = YES;
     
     [self addChild:ball2];
