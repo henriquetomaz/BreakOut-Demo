@@ -9,7 +9,14 @@
 #import "GameScene.h"
 #import "GameOver.h"
 
-@interface GameScene()
+static const CGFloat kTrackPointsPerSecond = 1000;
+
+static const uint32_t category_fence    = 0x1 << 3; // 0x00000000000000000000000000001000
+static const uint32_t category_paddle   = 0x1 << 2; // 0x00000000000000000000000000000100
+static const uint32_t category_block    = 0x1 << 1; // 0x00000000000000000000000000000010
+static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000000000001
+
+@interface GameScene() <SKPhysicsContactDelegate>
 
 @property (nonatomic, strong, nullable) UITouch *motivatingTuoch;
 
@@ -17,14 +24,29 @@
 
 @implementation GameScene
 
-static const CGFloat kTrackPointsPerSecond = 1000;
-
 -(void)didMoveToView:(SKView *)view {
+    
+    // set scene (aka root SKNode) node name
+    self.name = @"Fence";
     
     // set scene (aka root SKNode) physics body borders as the scene edges
     self.physicsBody = [SKPhysicsBody bodyWithEdgeLoopFromRect:self.frame];
     
+    self.physicsBody.categoryBitMask = category_fence;
+    self.physicsBody.collisionBitMask = 0x0; // nothing colligding with the fence should move the fence
+    self.physicsBody.contactTestBitMask = 0x0; // no callback when something hits the fence
+    
+    self.physicsWorld.contactDelegate = self;
+    
+    SKSpriteNode *background = (SKSpriteNode * )[self childNodeWithName:@"Background"];
+    background.zPosition = 0; // Which 2D layer ? Layer 0
+    background.lightingBitMask = 0x1;
+    
     SKSpriteNode *ball1 = [SKSpriteNode spriteNodeWithImageNamed:@"Blue Ball.png"];
+    ball1.name = @"Ball1";
+    ball1.position = CGPointMake(60, 30); // give the player a chance to play befor the ball hits the fence
+    ball1.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
+    
     ball1.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:ball1.size.width/2];
     ball1.physicsBody.dynamic = YES;
     ball1.position = CGPointMake(100, self.size.height/2);
@@ -35,8 +57,32 @@ static const CGFloat kTrackPointsPerSecond = 1000;
     ball1.physicsBody.allowsRotation = NO;
     ball1.physicsBody.mass = 1.0;
     ball1.physicsBody.velocity = CGVectorMake(200.0, 200.0); // initial velocity
+    ball1.physicsBody.affectedByGravity = NO;
+    ball1.physicsBody.categoryBitMask = category_ball;
+    // affected by collisions with
+    ball1.physicsBody.collisionBitMask = category_fence | category_ball | category_block | category_paddle;
+    // callbacks when in contact with
+    ball1.physicsBody.contactTestBitMask = category_fence | category_block;
+    ball1.physicsBody.usesPreciseCollisionDetection = YES;
+    
+    [self addChild:ball1];
+    
+    // Add a light (why not?) to the ball
+    SKLightNode *light = [SKLightNode new];
+    light.categoryBitMask = 0x1;
+    light.falloff = 1;
+    light.ambientColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0];
+    light.lightColor = [UIColor colorWithRed:0.7 green:0.7 blue:1.0 alpha:1.0];
+    light.ambientColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1.0];
+    light.zPosition = 1;
+    
+    [ball1 addChild:light];
     
     SKSpriteNode *ball2 = [SKSpriteNode spriteNodeWithImageNamed:@"Green Ball.png"];
+    ball2.name = @"Ball2";
+    ball2.position = CGPointMake(60, 75); // give the player a chance to play befor the ball hits the fence
+    ball2.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
+    
     ball2.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:ball1.size.width/2];
     ball2.physicsBody.dynamic = YES;
     ball2.position = CGPointMake(300, self.size.height/2);
@@ -47,9 +93,22 @@ static const CGFloat kTrackPointsPerSecond = 1000;
     ball2.physicsBody.allowsRotation = NO;
     ball2.physicsBody.mass = 1.0;
     ball2.physicsBody.velocity = CGVectorMake(0.0, 0.0); // initial velocity
+    ball2.physicsBody.affectedByGravity = NO;
+    ball2.physicsBody.categoryBitMask = category_ball;
+    // affected by collisions with
+    ball2.physicsBody.collisionBitMask = category_fence | category_ball | category_block | category_paddle;
+    // callbacks when in contact with
+    ball2.physicsBody.contactTestBitMask = category_fence | category_block;
+    ball2.physicsBody.usesPreciseCollisionDetection = YES;
+    
+    [self addChild:ball2];
     
     SKSpriteNode *paddle = [SKSpriteNode spriteNodeWithImageNamed:@"Paddle.png"];
     paddle.name = @"Paddle";
+    paddle.position = CGPointMake(self.size.width/2, 100);
+    paddle.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
+    paddle.lightingBitMask = 0x1;
+    
     paddle.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:paddle.size];
     paddle.physicsBody.dynamic = NO; // doesn't move by itself
     paddle.position = CGPointMake(self.size.width/2, 100);
@@ -60,9 +119,13 @@ static const CGFloat kTrackPointsPerSecond = 1000;
     paddle.physicsBody.allowsRotation = NO;
     paddle.physicsBody.mass = 1.0;
     paddle.physicsBody.velocity = CGVectorMake(0.0, 0.0); // initial velocity
+    paddle.physicsBody.categoryBitMask = category_paddle;
+    // affected by collisions with
+    paddle.physicsBody.collisionBitMask = 0x0;
+    // callbacks when in contact with
+    paddle.physicsBody.contactTestBitMask = category_ball;
+    paddle.physicsBody.usesPreciseCollisionDetection = YES;
     
-    [self addChild:ball1];
-    [self addChild:ball2];
     [self addChild:paddle];
     
     CGPoint ball1Anchor = CGPointMake(ball1.position.x, ball1.position.y);
@@ -74,6 +137,96 @@ static const CGFloat kTrackPointsPerSecond = 1000;
     joint.frequency = 1.5;
     
     [self.scene.physicsWorld addJoint:joint];
+    
+    // Add blocks
+    SKSpriteNode *block = [SKSpriteNode spriteNodeWithImageNamed:@"Block.png"];
+    
+    CGFloat kBlockWidth = block.size.width;
+    CGFloat kBlockHeight = block.size.height;
+    CGFloat kBlockHorizontalSpace = 20.0f;
+    int kBlocksPerRow = self.size.width / (kBlockWidth + kBlockHorizontalSpace);
+    
+    for (int i = 0; i < kBlocksPerRow; i++) {
+        block = [SKSpriteNode spriteNodeWithImageNamed:@"Block.png"];
+        block.name = @"Block";
+        block.position = CGPointMake(kBlockHorizontalSpace/2 + kBlockWidth/2 + i*kBlockWidth + i*kBlockHorizontalSpace, self.size.height - 100);
+        block.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
+        block.lightingBitMask = 0x1;
+        
+        block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size center:CGPointMake(0, 0)];
+        block.physicsBody.dynamic = NO; // doesn't move by itself
+        block.physicsBody.friction = 0.0;
+        block.physicsBody.restitution = 1.0;
+        block.physicsBody.linearDamping = 0.0;
+        block.physicsBody.angularDamping = 0.0;
+        block.physicsBody.allowsRotation = NO;
+        block.physicsBody.mass = 1.0;
+        block.physicsBody.velocity = CGVectorMake(0.0, 0.0); // initial velocity
+        block.physicsBody.categoryBitMask = category_block;
+        // affected by collisions with
+        block.physicsBody.collisionBitMask = 0x0;
+        // callbacks when in contact with
+        block.physicsBody.contactTestBitMask = category_ball;
+        block.physicsBody.usesPreciseCollisionDetection = NO;
+        
+        [self addChild:block];
+    }
+    
+    kBlocksPerRow = (self.size.width / (kBlockWidth + kBlockHorizontalSpace)) - 2;
+    
+    for (int i = 0; i < kBlocksPerRow; i++) {
+        block = [SKSpriteNode spriteNodeWithImageNamed:@"Block.png"];
+        block.name = @"Block";
+        block.position = CGPointMake(kBlockHorizontalSpace + kBlockWidth + i*kBlockWidth + i*kBlockHorizontalSpace, self.size.height - 100 - (1.5 * kBlockHeight));
+        block.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
+        block.lightingBitMask = 0x1;
+        
+        block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size center:CGPointMake(0, 0)];
+        block.physicsBody.dynamic = NO; // doesn't move by itself
+        block.physicsBody.friction = 0.0;
+        block.physicsBody.restitution = 1.0;
+        block.physicsBody.linearDamping = 0.0;
+        block.physicsBody.angularDamping = 0.0;
+        block.physicsBody.allowsRotation = NO;
+        block.physicsBody.mass = 1.0;
+        block.physicsBody.velocity = CGVectorMake(0.0, 0.0); // initial velocity
+        block.physicsBody.categoryBitMask = category_block;
+        // affected by collisions with
+        block.physicsBody.collisionBitMask = 0x0;
+        // callbacks when in contact with
+        block.physicsBody.contactTestBitMask = category_ball;
+        block.physicsBody.usesPreciseCollisionDetection = NO;
+        
+        [self addChild:block];
+    }
+    
+    kBlocksPerRow = self.size.width / (kBlockWidth + kBlockHorizontalSpace);
+    
+    for (int i = 0; i < kBlocksPerRow; i++) {
+        block = [SKSpriteNode spriteNodeWithImageNamed:@"Block.png"];
+        block.name = @"Block";
+        block.position = CGPointMake(kBlockHorizontalSpace + kBlockWidth + i*kBlockWidth + i*kBlockHorizontalSpace, self.size.height - 100 - (3 * kBlockHeight));
+        block.zPosition = 1; // Which 2D layer ? Layer 1; base layer is 0
+        block.lightingBitMask = 0x1;
+        
+        block.physicsBody = [SKPhysicsBody bodyWithRectangleOfSize:block.size center:CGPointMake(0, 0)];
+        block.physicsBody.dynamic = NO; // doesn't move by itself
+        block.physicsBody.friction = 0.0;
+        block.physicsBody.restitution = 1.0;
+        block.physicsBody.linearDamping = 0.0;
+        block.physicsBody.angularDamping = 0.0;
+        block.physicsBody.allowsRotation = NO;
+        block.physicsBody.mass = 1.0;
+        block.physicsBody.velocity = CGVectorMake(0.0, 0.0); // initial velocity
+        block.physicsBody.categoryBitMask = category_block;
+        // affected by collisions with
+        block.physicsBody.collisionBitMask = 0x0;
+        // callbacks when in contact with
+        block.physicsBody.contactTestBitMask = category_ball;
+        block.physicsBody.usesPreciseCollisionDetection = NO;
+        
+        [self addChild:block];
+    }
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -125,6 +278,58 @@ static const CGFloat kTrackPointsPerSecond = 1000;
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
+    
+    static const int kMaxSpeed = 1500;
+    static const int kMinSpeed = 400;
+    
+    // Adjust the linear damping if the ball starts moving a little too fast or slow
+    SKNode *ball1 = [self childNodeWithName:@"Ball1"];
+    SKNode *ball2 = [self childNodeWithName:@"Ball2"];
+    
+    float dx = (ball1.physicsBody.velocity.dx + ball2.physicsBody.velocity.dx) / 2;
+    float dy = (ball1.physicsBody.velocity.dy + ball2.physicsBody.velocity.dy) / 2;
+    float speed = sqrtf(dx * dx + dy * dy);
+    
+    if (kMaxSpeed < speed) {
+        ball1.physicsBody.linearDamping += 0.1f;
+        ball2.physicsBody.linearDamping += 0.1f;
+//        ball2.physicsBody.velocity = CGVectorMake(ball2.physicsBody.velocity.dx * 0.9, ball2.physicsBody.velocity.dy * 0.9);
+    } else if (kMinSpeed > speed) {
+        ball1.physicsBody.linearDamping -= 0.1f;
+        ball2.physicsBody.linearDamping -= 0.1f;
+        //        ball2.physicsBody.velocity = CGVectorMake(ball2.physicsBody.velocity.dx * 1.1, ball2.physicsBody.velocity.dy * 1.1);
+    } else {
+        ball1.physicsBody.linearDamping = 0.0f;
+        ball2.physicsBody.linearDamping = 0.0f;
+    }
+    
+//    NSLog(@"ball1 %f %f", ball1.position.x, ball1.position.y);
+    
+}
+
+-(void)didBeginContact:(SKPhysicsContact *)contact {
+    
+    NSString *nameA = contact.bodyA.node.name;
+    NSString *nameB = contact.bodyB.node.name;
+    
+    if (([nameA containsString:@"Fence"] && [nameB containsString:@"Ball"]) || ([nameA containsString:@"Ball"] && [nameB containsString:@"Fence"]) ) {
+        
+        // You missed the ball - Game Over
+        if (10 > contact.contactPoint.y) {
+            
+            SKView *skView = (SKView *)self.view;
+            [self removeFromParent];
+            
+            // Create and configure the scene
+            GameOver *gameOverScene = [GameOver nodeWithFileNamed:@"GameOver"];
+            gameOverScene.scaleMode = SKSceneScaleModeAspectFill;
+            
+            // Present the scene
+            [skView presentScene:gameOverScene];
+        }
+    }
+    
+    NSLog(@"What collided ? %@ %@", nameA, nameB);
 }
 
 @end
