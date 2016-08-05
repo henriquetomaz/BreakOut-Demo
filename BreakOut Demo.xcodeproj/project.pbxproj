@@ -25,6 +25,9 @@
 		41EA8CC01D26357A0094387C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41EA8CBE1D26357A0094387C /* LaunchScreen.storyboard */; };
 		41EA8CCA1D2638080094387C /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EA8CC81D2638080094387C /* Fabric.framework */; };
 		41EA8CCB1D2638080094387C /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41EA8CC91D2638080094387C /* Crashlytics.framework */; };
+		41F283361D5457800095881C /* PreBrickExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 41F283341D5457800095881C /* PreBrickExplosion.sks */; };
+		41F283371D5457800095881C /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 41F283351D5457800095881C /* spark.png */; };
+		41F283391D5457C20095881C /* PostBrickExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 41F283381D5457C20095881C /* PostBrickExplosion.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +56,9 @@
 		41EA8CC11D26357A0094387C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41EA8CC81D2638080094387C /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		41EA8CC91D2638080094387C /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		41F283341D5457800095881C /* PreBrickExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PreBrickExplosion.sks; sourceTree = "<group>"; };
+		41F283351D5457800095881C /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		41F283381D5457C20095881C /* PostBrickExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PostBrickExplosion.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +106,7 @@
 		41EA8CAA1D26357A0094387C /* BreakOut Demo */ = {
 			isa = PBXGroup;
 			children = (
+				41F283331D5457170095881C /* Particle Emitters */,
 				411AB42C1D51B8190007298F /* Sounds */,
 				41EA8CAE1D26357A0094387C /* AppDelegate.h */,
 				41EA8CAF1D26357A0094387C /* AppDelegate.m */,
@@ -129,6 +136,16 @@
 				41EA8CAC1D26357A0094387C /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		41F283331D5457170095881C /* Particle Emitters */ = {
+			isa = PBXGroup;
+			children = (
+				41F283341D5457800095881C /* PreBrickExplosion.sks */,
+				41F283351D5457800095881C /* spark.png */,
+				41F283381D5457C20095881C /* PostBrickExplosion.sks */,
+			);
+			name = "Particle Emitters";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,14 +207,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				41EA8CB51D26357A0094387C /* GameScene.sks in Resources */,
+				41F283371D5457800095881C /* spark.png in Resources */,
 				411AB42E1D51B8260007298F /* ping-pong-ball-hit.wav in Resources */,
 				411AB4321D51B9F40007298F /* firework-single-rocket.wav in Resources */,
+				41F283391D5457C20095881C /* PostBrickExplosion.sks in Resources */,
 				41D6C9981D330AA3007D93DB /* GameOver.sks in Resources */,
 				41EA8CC01D26357A0094387C /* LaunchScreen.storyboard in Resources */,
 				41D6C9961D330A52007D93DB /* GameStart.sks in Resources */,
 				417CE9A81D52348B0086E99B /* body-wall-impact.wav in Resources */,
 				41EA8CBD1D26357A0094387C /* Assets.xcassets in Resources */,
 				41EA8CBB1D26357A0094387C /* Main.storyboard in Resources */,
+				41F283361D5457800095881C /* PreBrickExplosion.sks in Resources */,
 				417CE9AA1D5234ED0086E99B /* short-giggle.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
