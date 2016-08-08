@@ -139,6 +139,17 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
     
     [self.scene.physicsWorld addJoint:joint];
     
+    self.blockBreakFrames = [NSMutableArray array];
+    
+    SKTextureAtlas *blockBreakAnimation = [SKTextureAtlas atlasNamed:@"block-break.atlas"];
+    unsigned long numImages = blockBreakAnimation.textureNames.count;
+    
+    for (int i = 0; i < numImages; i++) {
+        NSString *textureName = [NSString stringWithFormat:@"Block-Break%02d", i];
+        SKTexture *tempTexture = [blockBreakAnimation textureNamed:textureName];
+        [self.blockBreakFrames addObject:tempTexture];
+    }
+    
     // Add blocks
     SKSpriteNode *block = [SKSpriteNode spriteNodeWithImageNamed:@"Block.png"];
     
