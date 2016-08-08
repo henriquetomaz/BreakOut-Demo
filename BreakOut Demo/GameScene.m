@@ -332,8 +332,14 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
     
     NSString *nameA = contact.bodyA.node.name;
     NSString *nameB = contact.bodyB.node.name;
+    if (([nameA containsString:@"Block"] && [nameB containsString:@"Ball"]) || ([nameA containsString:@"Ball"] && [nameB containsString:@"Block"]) ) {
     
-    if (([nameA containsString:@"Fence"] && [nameB containsString:@"Ball"]) || ([nameA containsString:@"Ball"] && [nameB containsString:@"Fence"]) ) {
+        SKAction *blockAudio = [SKAction playSoundFileNamed:@"firework-single-rocket.wav" waitForCompletion:NO];
+        [self runAction:blockAudio];
+    } else if (([nameA containsString:@"Fence"] && [nameB containsString:@"Ball"]) || ([nameA containsString:@"Ball"] && [nameB containsString:@"Fence"]) ) {
+        
+        SKAction *fenceAudio = [SKAction playSoundFileNamed:@"body-wall-impact.wav" waitForCompletion:NO];
+        [self runAction:fenceAudio];
         
         // You missed the ball - Game Over
         if (10 > contact.contactPoint.y) {
@@ -348,6 +354,10 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
             // Present the scene
             [skView presentScene:gameOverScene];
         }
+    } else if (([nameA containsString:@"Ball"] && [nameB containsString:@"Paddle"]) || ([nameA containsString:@"Paddle"] && [nameB containsString:@"Ball"]) ) {
+        
+        SKAction *paddleAudio = [SKAction playSoundFileNamed:@"ping-pong-ball-hit.wav" waitForCompletion:NO];
+        [self runAction:paddleAudio];
     }
     
     NSLog(@"What collided ? %@ %@", nameA, nameB);
