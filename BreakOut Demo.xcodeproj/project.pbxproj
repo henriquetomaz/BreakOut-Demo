@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		411AB42E1D51B8260007298F /* ping-pong-ball-hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 411AB42D1D51B8260007298F /* ping-pong-ball-hit.wav */; };
 		411AB4321D51B9F40007298F /* firework-single-rocket.wav in Resources */ = {isa = PBXBuildFile; fileRef = 411AB4311D51B9F40007298F /* firework-single-rocket.wav */; };
+		4122143E1D584E1800E80C59 /* block-break.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4122143D1D584E1800E80C59 /* block-break.atlas */; };
 		413057CB1D54D42E00F3F6E1 /* GameWon.sks in Resources */ = {isa = PBXBuildFile; fileRef = 413057CA1D54D42E00F3F6E1 /* GameWon.sks */; };
 		413057CE1D54D45400F3F6E1 /* GameWon.m in Sources */ = {isa = PBXBuildFile; fileRef = 413057CD1D54D45400F3F6E1 /* GameWon.m */; };
 		417CE9A81D52348B0086E99B /* body-wall-impact.wav in Resources */ = {isa = PBXBuildFile; fileRef = 417CE9A71D52348B0086E99B /* body-wall-impact.wav */; };
@@ -35,6 +36,7 @@
 /* Begin PBXFileReference section */
 		411AB42D1D51B8260007298F /* ping-pong-ball-hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "ping-pong-ball-hit.wav"; sourceTree = "<group>"; };
 		411AB4311D51B9F40007298F /* firework-single-rocket.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "firework-single-rocket.wav"; sourceTree = "<group>"; };
+		4122143D1D584E1800E80C59 /* block-break.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "block-break.atlas"; sourceTree = "<group>"; };
 		413057CA1D54D42E00F3F6E1 /* GameWon.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameWon.sks; sourceTree = "<group>"; };
 		413057CC1D54D45400F3F6E1 /* GameWon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameWon.h; sourceTree = "<group>"; };
 		413057CD1D54D45400F3F6E1 /* GameWon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameWon.m; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				41EA8CB61D26357A0094387C /* GameViewController.h */,
 				41EA8CB71D26357A0094387C /* GameViewController.m */,
 				41EA8CB91D26357A0094387C /* Main.storyboard */,
+				4122143D1D584E1800E80C59 /* block-break.atlas */,
 				41EA8CBC1D26357A0094387C /* Assets.xcassets */,
 				41EA8CBE1D26357A0094387C /* LaunchScreen.storyboard */,
 				41EA8CC11D26357A0094387C /* Info.plist */,
@@ -224,6 +227,7 @@
 				41D6C9961D330A52007D93DB /* GameStart.sks in Resources */,
 				417CE9A81D52348B0086E99B /* body-wall-impact.wav in Resources */,
 				41EA8CBD1D26357A0094387C /* Assets.xcassets in Resources */,
+				4122143E1D584E1800E80C59 /* block-break.atlas in Resources */,
 				41EA8CBB1D26357A0094387C /* Main.storyboard in Resources */,
 				41F283361D5457800095881C /* PreBrickExplosion.sks in Resources */,
 				413057CB1D54D42E00F3F6E1 /* GameWon.sks in Resources */,
