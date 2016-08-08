@@ -19,6 +19,7 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
 @interface GameScene() <SKPhysicsContactDelegate>
 
 @property (nonatomic, strong, nullable) UITouch *motivatingTuoch;
+@property (strong, nonatomic) NSMutableArray *blockBreakFrames;
 
 @end
 
