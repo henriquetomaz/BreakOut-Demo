@@ -305,15 +305,17 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
     SKNode *ball1 = [self childNodeWithName:@"Ball1"];
     SKNode *ball2 = [self childNodeWithName:@"Ball2"];
     
+    float speedBall1 = sqrt(ball1.physicsBody.velocity.dx * ball1.physicsBody.velocity.dx + ball1.physicsBody.velocity.dy * ball1.physicsBody.velocity.dy);
+    
     float dx = (ball1.physicsBody.velocity.dx + ball2.physicsBody.velocity.dx) / 2;
     float dy = (ball1.physicsBody.velocity.dy + ball2.physicsBody.velocity.dy) / 2;
-    float speed = sqrtf(dx * dx + dy * dy);
+    float speed = sqrt(dx * dx + dy * dy);
     
-    if (kMaxSpeed < speed) {
+    if (kMaxSpeed < speed || kMaxSpeed < speedBall1) {
         ball1.physicsBody.linearDamping += 0.1f;
         ball2.physicsBody.linearDamping += 0.1f;
 //        ball2.physicsBody.velocity = CGVectorMake(ball2.physicsBody.velocity.dx * 0.9, ball2.physicsBody.velocity.dy * 0.9);
-    } else if (kMinSpeed > speed) {
+    } else if (kMinSpeed > speed || kMinSpeed > speedBall1) {
         ball1.physicsBody.linearDamping -= 0.1f;
         ball2.physicsBody.linearDamping -= 0.1f;
         //        ball2.physicsBody.velocity = CGVectorMake(ball2.physicsBody.velocity.dx * 1.1, ball2.physicsBody.velocity.dy * 1.1);
