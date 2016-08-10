@@ -358,6 +358,22 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
         
         // Group actions
         SKAction *actionRampUpGroup = [SKAction group:@[actionAudioRampUp, actionParticleRampUp, actionVisualRampUp]];
+        
+        SKAction *actionAudioExplode = [SKAction playSoundFileNamed:@"short-giggle" waitForCompletion:NO];
+        
+        NSString *particleExplosionPath = [[NSBundle mainBundle] pathForResource:@"PostBrickExplosion" ofType:@"sks"];
+        SKEmitterNode *particleExplosion = [NSKeyedUnarchiver unarchiveObjectWithFile:particleRampUpPath];
+        
+        particleExplosion.position = CGPointMake(0, 0);
+        particleExplosion.zPosition = 2;
+        
+        SKAction *actionParticleExplosion = [SKAction runBlock:^{
+            [block addChild:particleExplosion];
+        }];
+        
+        SKAction *actionRemoveBlock = [SKAction removeFromParent];
+        
+        SKAction *actionExplodeSequence = [SKAction sequence:@[actionAudioExplode, actionParticleExplosion, [SKAction fadeInWithDuration:1]]];
     } else if (([nameA containsString:@"Fence"] && [nameB containsString:@"Ball"]) || ([nameA containsString:@"Ball"] && [nameB containsString:@"Fence"]) ) {
         
         SKAction *fenceAudio = [SKAction playSoundFileNamed:@"body-wall-impact.wav" waitForCompletion:NO];
