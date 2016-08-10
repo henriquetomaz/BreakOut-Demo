@@ -334,6 +334,13 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
     NSString *nameB = contact.bodyB.node.name;
     if (([nameA containsString:@"Block"] && [nameB containsString:@"Ball"]) || ([nameA containsString:@"Ball"] && [nameB containsString:@"Block"]) ) {
     
+        // Figure out which body is exploding
+        SKNode *block;
+        if ([nameA containsString:@"Block"]) {
+            block = contact.bodyA.node;
+        } else {
+            block = contact.bodyB.node;
+        }
     } else if (([nameA containsString:@"Fence"] && [nameB containsString:@"Ball"]) || ([nameA containsString:@"Ball"] && [nameB containsString:@"Fence"]) ) {
         
         SKAction *fenceAudio = [SKAction playSoundFileNamed:@"body-wall-impact.wav" waitForCompletion:NO];
