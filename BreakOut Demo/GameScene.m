@@ -363,7 +363,7 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
         SKAction *actionAudioExplode = [SKAction playSoundFileNamed:@"short-giggle" waitForCompletion:NO];
         
         NSString *particleExplosionPath = [[NSBundle mainBundle] pathForResource:@"PostBrickExplosion" ofType:@"sks"];
-        SKEmitterNode *particleExplosion = [NSKeyedUnarchiver unarchiveObjectWithFile:particleRampUpPath];
+        SKEmitterNode *particleExplosion = [NSKeyedUnarchiver unarchiveObjectWithFile:particleExplosionPath];
         
         particleExplosion.position = CGPointMake(0, 0);
         particleExplosion.zPosition = 2;
