@@ -8,6 +8,7 @@
 
 #import "GameScene.h"
 #import "GameOver.h"
+#import "GameWon.h"
 
 static const CGFloat kTrackPointsPerSecond = 1000;
 
@@ -374,6 +375,22 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
         SKAction *actionRemoveBlock = [SKAction removeFromParent];
         
         SKAction *actionExplodeSequence = [SKAction sequence:@[actionAudioExplode, actionParticleExplosion, [SKAction fadeInWithDuration:1]]];
+        
+        SKAction *checkGameOver = [SKAction runBlock:^{
+            // Are we out of blocks ? If so, game is over. Just wait a second so it's not too abrupt.
+            BOOL anyBlocksRemaining = ([self childNodeWithName:@"Block"] != nil);
+            
+            if (!anyBlocksRemaining) {
+                SKView *skView = (SKView *)self.view;
+                
+                [self removeFromParent];
+                
+                GameWon *gameWonScene = [GameWon nodeWithFileNamed:@"GameWon"];
+                gameWonScene.scale = SKSceneScaleModeAspectFit;
+                
+                [skView presentScene:gameWonScene];
+            }
+        }];
     } else if (([nameA containsString:@"Fence"] && [nameB containsString:@"Ball"]) || ([nameA containsString:@"Ball"] && [nameB containsString:@"Fence"]) ) {
         
         SKAction *fenceAudio = [SKAction playSoundFileNamed:@"body-wall-impact.wav" waitForCompletion:NO];
