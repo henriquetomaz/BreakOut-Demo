@@ -341,6 +341,23 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
         } else {
             block = contact.bodyB.node;
         }
+        
+        // Do the build up
+        SKAction *actionAudioRampUp = [SKAction playSoundFileNamed:@"firework-single-rocket.wav" waitForCompletion:NO];
+        SKAction *actionVisualRampUp = [SKAction animateWithTextures:self.blockBreakFrames timePerFrame:0.04f resize:NO restore:NO];
+        
+        NSString *particleRampUpPath = [[NSBundle mainBundle] pathForResource:@"PreBrickExplosion" ofType:@"sks"];
+        SKEmitterNode *particleRampUp = [NSKeyedUnarchiver unarchiveObjectWithFile:particleRampUpPath];
+        
+        particleRampUp.position = CGPointMake(0, 0);
+        particleRampUp.zPosition = 0;
+        
+        SKAction *actionParticleRampUp = [SKAction runBlock:^{
+            [block addChild:particleRampUp];
+        }];
+        
+        // Group actions
+        SKAction *actionRampUpGroup = [SKAction group:@[actionAudioRampUp, actionParticleRampUp, actionVisualRampUp]];
     } else if (([nameA containsString:@"Fence"] && [nameB containsString:@"Ball"]) || ([nameA containsString:@"Ball"] && [nameB containsString:@"Fence"]) ) {
         
         SKAction *fenceAudio = [SKAction playSoundFileNamed:@"body-wall-impact.wav" waitForCompletion:NO];
