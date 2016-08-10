@@ -391,6 +391,10 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
                 [skView presentScene:gameWonScene];
             }
         }];
+        
+        [block runAction:[SKAction sequence:@[actionRampUpGroup, actionExplodeSequence, actionRemoveBlock, checkGameOver]]];
+        
+        
     } else if (([nameA containsString:@"Fence"] && [nameB containsString:@"Ball"]) || ([nameA containsString:@"Ball"] && [nameB containsString:@"Fence"]) ) {
         
         SKAction *fenceAudio = [SKAction playSoundFileNamed:@"body-wall-impact.wav" waitForCompletion:NO];
