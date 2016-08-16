@@ -450,6 +450,9 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
         
         SKAction *paddleAudio = [SKAction playSoundFileNamed:@"ping-pong-ball-hit.wav" waitForCompletion:NO];
         [self runAction:paddleAudio];
+    } else {
+        SKAction *fenceAudio = [SKAction playSoundFileNamed:@"body-wall-impact.wav" waitForCompletion:NO];
+        [self runAction:fenceAudio];
     }
     
     NSLog(@"What collided ? %@ %@", nameA, nameB);
