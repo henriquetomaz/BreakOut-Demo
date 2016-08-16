@@ -400,15 +400,47 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
         SKAction *fenceAudio = [SKAction playSoundFileNamed:@"body-wall-impact.wav" waitForCompletion:NO];
         [self runAction:fenceAudio];
         
+        SKNode *ball;
+        
+        if ([nameA containsString:@"Ball"]) {
+            ball = contact.bodyA.node;
+        } else {
+            ball = contact.bodyB.node;
+        }
+        
         // You missed the ball - Game Over
         if (10 > contact.contactPoint.y) {
+
+            SKAction *actionAudioExplode = [SKAction playSoundFileNamed:@"short-giggle" waitForCompletion:NO];
             
-            SKView *skView = (SKView *)self.view;
-            [self removeFromParent];
+            NSString *particleExplosionPath = [[NSBundle mainBundle] pathForResource:@"PostBrickExplosion" ofType:@"sks"];
+            SKEmitterNode *particleExplosion = [NSKeyedUnarchiver unarchiveObjectWithFile:particleExplosionPath];
             
-            // Create and configure the scene
-            GameOver *gameOverScene = [GameOver nodeWithFileNamed:@"GameOver"];
-            gameOverScene.scaleMode = SKSceneScaleModeAspectFill;
+            particleExplosion.position = CGPointMake(0, 0);
+            particleExplosion.zPosition = 2;
+            particleExplosion.targetNode = self;
+            
+            SKAction *actionParticleExplosion = [SKAction runBlock:^{
+                [ball addChild:particleExplosion];
+            }];
+            
+            SKAction *actionRemoveBlock = [SKAction removeFromParent];
+            
+            SKAction *actionSwitchScene = [SKAction runBlock:^{
+                SKView *skView = (SKView *)self.view;
+                [self removeFromParent];
+                
+                // Create and configure the scene
+                GameOver *gameOverScene = [GameOver nodeWithFileNamed:@"GameOver"];
+                gameOverScene.scaleMode = SKSceneScaleModeAspectFill;
+                
+                // Present the scene
+                [skView presentScene:gameOverScene];
+            }];
+            
+            SKAction *actionExplodeSequence = [SKAction sequence:@[actionAudioExplode, actionParticleExplosion, [SKAction fadeInWithDuration:1], actionRemoveBlock, actionSwitchScene]];
+            
+            [ball runAction:actionExplodeSequence];
             
             // Present the scene
             [skView presentScene:gameOverScene];
