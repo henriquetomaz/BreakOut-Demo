@@ -441,9 +441,10 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
             SKAction *actionExplodeSequence = [SKAction sequence:@[actionAudioExplode, actionParticleExplosion, [SKAction fadeInWithDuration:1], actionRemoveBlock, actionSwitchScene]];
             
             [ball runAction:actionExplodeSequence];
+        } else {
             
-            // Present the scene
-            [skView presentScene:gameOverScene];
+            SKAction *fenceAudio = [SKAction playSoundFileNamed:@"body-wall-impact.wav" waitForCompletion:NO];
+            [self runAction:fenceAudio];
         }
     } else if (([nameA containsString:@"Ball"] && [nameB containsString:@"Paddle"]) || ([nameA containsString:@"Paddle"] && [nameB containsString:@"Ball"]) ) {
         
