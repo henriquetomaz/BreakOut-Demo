@@ -31,6 +31,7 @@
 		41F283361D5457800095881C /* PreBrickExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 41F283341D5457800095881C /* PreBrickExplosion.sks */; };
 		41F283371D5457800095881C /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 41F283351D5457800095881C /* spark.png */; };
 		41F283391D5457C20095881C /* PostBrickExplosion.sks in Resources */ = {isa = PBXBuildFile; fileRef = 41F283381D5457C20095881C /* PostBrickExplosion.sks */; };
+		41FA3A3F1D642B1400BF0EB0 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41FA3A3E1D642B1400BF0EB0 /* GameKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +67,7 @@
 		41F283341D5457800095881C /* PreBrickExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PreBrickExplosion.sks; sourceTree = "<group>"; };
 		41F283351D5457800095881C /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		41F283381D5457C20095881C /* PostBrickExplosion.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = PostBrickExplosion.sks; sourceTree = "<group>"; };
+		41FA3A3E1D642B1400BF0EB0 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41FA3A3F1D642B1400BF0EB0 /* GameKit.framework in Frameworks */,
 				41EA8CCB1D2638080094387C /* Crashlytics.framework in Frameworks */,
 				41EA8CCA1D2638080094387C /* Fabric.framework in Frameworks */,
 			);
@@ -95,6 +98,7 @@
 		41EA8C9F1D2635790094387C = {
 			isa = PBXGroup;
 			children = (
+				41FA3A3E1D642B1400BF0EB0 /* GameKit.framework */,
 				41EA8CAA1D26357A0094387C /* BreakOut Demo */,
 				41EA8CA91D2635790094387C /* Products */,
 				41EA8CC81D2638080094387C /* Fabric.framework */,
@@ -191,6 +195,12 @@
 				TargetAttributes = {
 					41EA8CA71D2635790094387C = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 7DQPE2P5LU;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
