@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		410A322B1D6581AF0020F54F /* 100 points particle.png in Resources */ = {isa = PBXBuildFile; fileRef = 410A322A1D6581AF0020F54F /* 100 points particle.png */; };
+		410A322D1D6582AE0020F54F /* BrickHit.sks in Resources */ = {isa = PBXBuildFile; fileRef = 410A322C1D6582AE0020F54F /* BrickHit.sks */; };
 		411AB42E1D51B8260007298F /* ping-pong-ball-hit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 411AB42D1D51B8260007298F /* ping-pong-ball-hit.wav */; };
 		411AB4321D51B9F40007298F /* firework-single-rocket.wav in Resources */ = {isa = PBXBuildFile; fileRef = 411AB4311D51B9F40007298F /* firework-single-rocket.wav */; };
 		4122143E1D584E1800E80C59 /* block-break.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 4122143D1D584E1800E80C59 /* block-break.atlas */; };
@@ -35,6 +37,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		410A322A1D6581AF0020F54F /* 100 points particle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "100 points particle.png"; sourceTree = "<group>"; };
+		410A322C1D6582AE0020F54F /* BrickHit.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = BrickHit.sks; sourceTree = "<group>"; };
 		411AB42D1D51B8260007298F /* ping-pong-ball-hit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "ping-pong-ball-hit.wav"; sourceTree = "<group>"; };
 		411AB4311D51B9F40007298F /* firework-single-rocket.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "firework-single-rocket.wav"; sourceTree = "<group>"; };
 		4122143D1D584E1800E80C59 /* block-break.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = "block-break.atlas"; sourceTree = "<group>"; };
@@ -159,6 +163,8 @@
 				41F283341D5457800095881C /* PreBrickExplosion.sks */,
 				41F283351D5457800095881C /* spark.png */,
 				41F283381D5457C20095881C /* PostBrickExplosion.sks */,
+				410A322A1D6581AF0020F54F /* 100 points particle.png */,
+				410A322C1D6582AE0020F54F /* BrickHit.sks */,
 			);
 			name = "Particle Emitters";
 			sourceTree = "<group>";
@@ -231,6 +237,7 @@
 				41F283371D5457800095881C /* spark.png in Resources */,
 				411AB42E1D51B8260007298F /* ping-pong-ball-hit.wav in Resources */,
 				411AB4321D51B9F40007298F /* firework-single-rocket.wav in Resources */,
+				410A322D1D6582AE0020F54F /* BrickHit.sks in Resources */,
 				41F283391D5457C20095881C /* PostBrickExplosion.sks in Resources */,
 				41D6C9981D330AA3007D93DB /* GameOver.sks in Resources */,
 				41EA8CC01D26357A0094387C /* LaunchScreen.storyboard in Resources */,
@@ -239,6 +246,7 @@
 				41EA8CBD1D26357A0094387C /* Assets.xcassets in Resources */,
 				4122143E1D584E1800E80C59 /* block-break.atlas in Resources */,
 				41EA8CBB1D26357A0094387C /* Main.storyboard in Resources */,
+				410A322B1D6581AF0020F54F /* 100 points particle.png in Resources */,
 				41F283361D5457800095881C /* PreBrickExplosion.sks in Resources */,
 				413057CB1D54D42E00F3F6E1 /* GameWon.sks in Resources */,
 				417CE9AA1D5234ED0086E99B /* short-giggle.wav in Resources */,
