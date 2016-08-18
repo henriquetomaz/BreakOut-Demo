@@ -418,7 +418,8 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
             
             particleExplosion.position = CGPointMake(0, 0);
             particleExplosion.zPosition = 2;
-            particleExplosion.targetNode = self;
+            // Could not assign to the scene/root node
+//            particleExplosion.targetNode = self;
             
             SKAction *actionParticleExplosion = [SKAction runBlock:^{
                 [ball addChild:particleExplosion];
