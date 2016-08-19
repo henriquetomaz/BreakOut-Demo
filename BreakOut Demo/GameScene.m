@@ -21,6 +21,9 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
 
 @property (nonatomic, strong, nullable) UITouch *motivatingTuoch;
 @property (strong, nonatomic) NSMutableArray *blockBreakFrames;
+@property (assign, nonatomic) int blocksBusted;
+@property (assign, nonatomic) BOOL busted1Block;
+@property (assign, nonatomic) int busted10Blocks;
 
 @end
 
@@ -28,6 +31,9 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
 
 -(void)didMoveToView:(SKView *)view {
     
+    self.blocksBusted = 0;
+    self.busted1Block = NO;
+    self.busted10Blocks = NO;
     // set scene (aka root SKNode) node name
     self.name = @"Fence";
     
