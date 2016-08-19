@@ -9,6 +9,7 @@
 #import "GameScene.h"
 #import "GameOver.h"
 #import "GameWon.h"
+#import "GameKit/GameKit.h"
 
 static const CGFloat kTrackPointsPerSecond = 1000;
 
@@ -21,12 +22,20 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
 
 @property (nonatomic, strong, nullable) UITouch *motivatingTuoch;
 @property (strong, nonatomic) NSMutableArray *blockBreakFrames;
+@property (assign, nonatomic) int blocksBusted;
+@property (assign, nonatomic) BOOL busted1Block;
+@property (assign, nonatomic) int busted10Blocks;
 
 @end
 
 @implementation GameScene
 
 -(void)didMoveToView:(SKView *)view {
+    
+    self.blocksBusted = 0;
+    self.busted1Block = NO;
+    self.busted10Blocks = NO;
+    [self resetAchievements];
     
     // set scene (aka root SKNode) node name
     self.name = @"Fence";
@@ -335,6 +344,18 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
     NSString *nameB = contact.bodyB.node.name;
     if (([nameA containsString:@"Block"] && [nameB containsString:@"Ball"]) || ([nameA containsString:@"Ball"] && [nameB containsString:@"Block"]) ) {
     
+        self.blocksBusted++;
+        
+        if (1 <= self.blocksBusted && NO == self.busted1Block) {
+            self.busted1Block = YES;
+            [self report1BlockAchievement];
+        }
+        
+        if (10 <= self.blocksBusted && NO == self.busted10Blocks) {
+            self.busted10Blocks = YES;
+            [self report10BlocksAchievement];
+        }
+        
         // Figure out which body is exploding
         SKNode *block;
         if ([nameA containsString:@"Block"]) {
@@ -372,6 +393,16 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
             [block addChild:particleExplosion];
         }];
         
+        NSString *particleScorePath = [[NSBundle mainBundle] pathForResource:@"BrickHit" ofType:@"sks"];
+        SKEmitterNode *particleScore = [NSKeyedUnarchiver unarchiveObjectWithFile:particleScorePath];
+        
+        particleScore.position = CGPointMake(0, 0);
+        particleScore.zPosition = 2;
+        
+        SKAction *actionParticleScore = [SKAction runBlock:^{
+            [block addChild:particleScore];
+        }];
+        
         SKAction *actionRemoveBlock = [SKAction removeFromParent];
         
         SKAction *actionExplodeSequence = [SKAction sequence:@[actionAudioExplode, actionParticleExplosion, [SKAction fadeInWithDuration:1]]];
@@ -385,6 +416,8 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
                 
                 [self removeFromParent];
                 
+                [self reportScore:self.blocksBusted * 100];
+                
                 GameWon *gameWonScene = [GameWon nodeWithFileNamed:@"GameWon"];
                 gameWonScene.scale = SKSceneScaleModeAspectFit;
                 
@@ -392,7 +425,7 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
             }
         }];
         
-        [block runAction:[SKAction sequence:@[actionRampUpGroup, actionExplodeSequence, actionRemoveBlock, checkGameOver]]];
+        [block runAction:[SKAction sequence:@[actionParticleScore, actionRampUpGroup, actionExplodeSequence, actionRemoveBlock, checkGameOver]]];
         
         
     } else if (([nameA containsString:@"Fence"] && [nameB containsString:@"Ball"]) || ([nameA containsString:@"Ball"] && [nameB containsString:@"Fence"]) ) {
@@ -418,13 +451,18 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
             
             particleExplosion.position = CGPointMake(0, 0);
             particleExplosion.zPosition = 2;
-            particleExplosion.targetNode = self;
+            // Could not assign to the scene/root node
+//            particleExplosion.targetNode = self;
             
             SKAction *actionParticleExplosion = [SKAction runBlock:^{
                 [ball addChild:particleExplosion];
             }];
             
-            SKAction *actionRemoveBlock = [SKAction removeFromParent];
+            SKAction *actionRemoveBall = [SKAction removeFromParent];
+            
+            SKAction *actionReportScore = [SKAction runBlock:^{
+                [self reportScore:self.blocksBusted * 100];
+            }];
             
             SKAction *actionSwitchScene = [SKAction runBlock:^{
                 SKView *skView = (SKView *)self.view;
@@ -438,7 +476,7 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
                 [skView presentScene:gameOverScene];
             }];
             
-            SKAction *actionExplodeSequence = [SKAction sequence:@[actionAudioExplode, actionParticleExplosion, [SKAction fadeInWithDuration:1], actionRemoveBlock, actionSwitchScene]];
+            SKAction *actionExplodeSequence = [SKAction sequence:@[actionAudioExplode, actionParticleExplosion, [SKAction fadeInWithDuration:1], actionRemoveBall, actionReportScore, actionSwitchScene]];
             
             [ball runAction:actionExplodeSequence];
         } else {
@@ -456,6 +494,56 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
     }
     
     NSLog(@"What collided ? %@ %@", nameA, nameB);
+}
+
+-(void)report1BlockAchievement {
+    
+    GKAchievement *scoreAchievement = [[GKAchievement alloc] initWithIdentifier:@"broke_1_block"];
+    scoreAchievement.percentComplete = 100;
+    scoreAchievement.showsCompletionBanner = YES;
+    [GKAchievement reportAchievements:@[scoreAchievement] withCompletionHandler:^(NSError * _Nullable error) {
+        
+        if (nil != error) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    }];
+}
+
+
+-(void)report10BlocksAchievement {
+    
+    GKAchievement *scoreAchievement = [[GKAchievement alloc] initWithIdentifier:@"broke_10_blocks"];
+    scoreAchievement.percentComplete = 100;
+    scoreAchievement.showsCompletionBanner = YES;
+    [GKAchievement reportAchievements:@[scoreAchievement] withCompletionHandler:^(NSError * _Nullable error) {
+        
+        if (nil != error) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    }];
+}
+
+-(void)reportScore:(int)myScore {
+    
+    GKScore *score = [[GKScore alloc] initWithLeaderboardIdentifier:@"high_score"];
+    score.value = myScore;
+    
+    [GKScore reportScores:@[score] withCompletionHandler:^(NSError * _Nullable error) {
+        
+        if (nil != error) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    }];
+}
+
+-(void)resetAchievements {
+    
+    [GKAchievement resetAchievementsWithCompletionHandler:^(NSError * _Nullable error) {
+        
+        if (nil != error) {
+            NSLog(@"%@", [error localizedDescription]);
+        }
+    }];
 }
 
 @end
