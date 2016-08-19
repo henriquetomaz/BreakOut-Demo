@@ -372,6 +372,16 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
             [block addChild:particleExplosion];
         }];
         
+        NSString *particleScorePath = [[NSBundle mainBundle] pathForResource:@"BrickHit" ofType:@"sks"];
+        SKEmitterNode *particleScore = [NSKeyedUnarchiver unarchiveObjectWithFile:particleScorePath];
+        
+        particleScore.position = CGPointMake(0, 0);
+        particleScore.zPosition = 2;
+        
+        SKAction *actionParticleScore = [SKAction runBlock:^{
+            [block addChild:particleScore];
+        }];
+        
         SKAction *actionRemoveBlock = [SKAction removeFromParent];
         
         SKAction *actionExplodeSequence = [SKAction sequence:@[actionAudioExplode, actionParticleExplosion, [SKAction fadeInWithDuration:1]]];
@@ -392,7 +402,7 @@ static const uint32_t category_ball     = 0x1 << 0; // 0x00000000000000000000000
             }
         }];
         
-        [block runAction:[SKAction sequence:@[actionRampUpGroup, actionExplodeSequence, actionRemoveBlock, checkGameOver]]];
+        [block runAction:[SKAction sequence:@[actionParticleScore, actionRampUpGroup, actionExplodeSequence, actionRemoveBlock, checkGameOver]]];
         
         
     } else if (([nameA containsString:@"Fence"] && [nameB containsString:@"Ball"]) || ([nameA containsString:@"Ball"] && [nameB containsString:@"Fence"]) ) {
