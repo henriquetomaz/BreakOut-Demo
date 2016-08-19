@@ -8,6 +8,7 @@
 
 #import "GameViewController.h"
 #import "GameStart.h"
+@import GameKit;
 
 @implementation GameViewController
 
@@ -15,6 +16,8 @@
 {
     [super viewDidLoad];
 
+    [self registerLocalPlayerWithGameCenter];
+    
     // Configure the view.
     SKView * skView = (SKView *)self.view;
     skView.showsFPS = YES;
@@ -28,6 +31,26 @@
     
     // Present the scene.
     [skView presentScene:scene];
+    
+//    [self registerLocalPlayerWithGameCenter];
+}
+
+- (void) registerLocalPlayerWithGameCenter {
+    
+    GKLocalPlayer *localPlayer = [GKLocalPlayer localPlayer];
+    [localPlayer setAuthenticateHandler:^(UIViewController * _Nullable viewController, NSError * _Nullable error) {
+        // Don't need to pause the view as we do have a game start scene
+//        SKView *skView = (SKView *)self.view;
+//        [skView setPaused:YES];
+        
+        if (error) {
+            NSLog(@"Error authenticating the local player:%@", error);
+        }
+        
+        if (viewController) {
+            [self presentViewController:viewController animated:YES completion:nil];
+        }
+    }];
 }
 
 - (BOOL)shouldAutorotate
